@@ -1683,51 +1683,117 @@ void D::check(int new_val)
 }
 
 //**********Virtual Functions
-
 class Person {
-public:
+protected:
 	int age;
 	string name;
+public:
+	virtual void getdata();
+	virtual void putdata();
 };
 
-class Professor : Person {
+void Person::getdata() {};
+void Person::putdata() {};
 
+class Professor :public  Person {
+private:
+	const int id;
+	static int cur_id;
+	string name;
+	int publications, age;
+
+public:
+
+	Professor() : id(++cur_id)
+	{};
+
+	void getdata() override {
+		cin >> this->name;
+		cin >> this->age;
+		cin >> this->publications;
+	};
+
+	void putdata() override {
+		cout << name << " " << age << " " << publications << " " << this->id << "\n";
+	};
 };
 
-class Student : Person {
+int Professor::cur_id = 0;
 
+class Student2 : public Person {
+	const int id;
+	static int cur_id;
+
+	string name;
+	int age;
+	int mark[6];
+
+public:
+
+	Student2() : id(++cur_id)
+	{};
+
+	void getdata() override {
+		cin >> this->name;
+		cin >> this->age;
+
+		for (int i = 0; i < 6; i++) {
+			cin >> this->mark[i];
+		};
+	};
+
+	void putdata() override {
+		int sum = 0;
+		for (int i = 0; i < 6; i++) {
+			int previous = mark[i];
+			sum += mark[i];
+		}
+
+		cout << name << " " << age << " " << sum << " " << id << "\n";
+	};
 };
+
+int Student2::cur_id = 0;
 
 
 void VirtualFuncOperations() {
 
-	int n, val;
-	cin >> n; //The number of objects that is going to be created.
+	int val;
+	const int n = 4; //The number of objects that is going to be created.
 	Person *per[n];
 
 	for (int i = 0; i < n; i++) {
-
 		cin >> val;
 		if (val == 1) {
 			// If val is 1 current object is of type Professor
 			per[i] = new Professor;
-
 		}
-		else per[i] = new Student; // Else the current object is of type Student
+		else per[i] = new Student2; // Else the current object is of type Student
 
 		per[i]->getdata(); // Get the data from the user.
-
 	}
 
 	for (int i = 0; i < n; i++)
 		per[i]->putdata(); // Print the required output for each object.
 
+	//Clean memory
+	for (int i = 0; i < n; i++)
+	{
+		delete per[i];
+		per[i] = 0;
+	}
 }
+
+//*****************Abstract Classes
+
+
 
 
 
 int main()
  {
+	VirtualFuncOperations();
+
 	//Accessing Inherited Functions Tests:
 	//D d;
 	//int new_val;
