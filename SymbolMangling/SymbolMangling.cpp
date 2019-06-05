@@ -1968,23 +1968,27 @@ struct Workshop
 
 struct Available_Workshops 
 {
-private:
+public:
 	int signedWorkshops;
-	Workshop* workShops = new Workshop[signedWorkshops];
+	vector<Workshop> *data = new vector<Workshop>(signedWorkshops);
+private:
+	//Workshop* workShops = new Workshop[signedWorkshops];
 };
 
 //Implement the functions initialize and CalculateMaxWorkshops
 Available_Workshops* initialize(int start_time[], int duration[], int n) {
+	Available_Workshops* aw = new Available_Workshops();
 	for (int i = 0; i < n; i++) {
 		Workshop* w = new Workshop;
 		w->startTime = start_time[i];
 		w->duration = duration[i];
 		w->endtime = abs(w->startTime + w->duration);	
 	}
+	return aw;
 };
 
 int CalculateMaxWorkshops(Available_Workshops* ptr) {
-
+	return 0;
 };
 
 void ExecWorkshops() {
@@ -2010,6 +2014,9 @@ void ExecWorkshops() {
 void PlayLambdas() {
 	int a = 3, b = 10;
 
+	auto k = [&a](int c) {return a * 4; };
+
+	cout << k(6);
 };
 
 
@@ -2017,6 +2024,7 @@ void PlayLambdas() {
 int main()
  {
 
+	PlayLambdas();
 
 	//MessagesExchangerClient();
 	
