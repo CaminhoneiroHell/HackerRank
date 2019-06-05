@@ -304,7 +304,6 @@ void BinarySearch() {
 	cout << (binary_search(begin(v), end(v), 4) ? "Found" : "NotFound"); //Outputs notfound
 }
 
-
 //*** std::lower_bound
 //	This is an algorithm with logarithmic time
 //complexity [0(logn)] that will return an iterator to
@@ -375,9 +374,6 @@ void LessBound() {
 
 
 //Hacker Rank:
-
-
-
 void passByReference(int* x)
 {
 	*x = 66;
@@ -1374,123 +1370,6 @@ void Deque() {
 
 }
 
-
-//*******CLASS TEMPLATES
-
-//Sum tempalte method
-template <class T>
-T sum(T a, T b)
-{
-	T result;
-	result = a + b;
-	return result;
-}
-
-//Multiply template class
-template <class T>
-class Multiply {
-	T product1, product2;
-public:
-	Multiply(T arg1, T arg2) { product1 = arg1, product2 = arg2; };
-	T Execute() { return product1 * product2; };
-};
-
-
-//Divide template class
-template <class T>
-class Divide {
-	T element;
-public:
-	Divide(T arg) { element = arg; };
-	T Execute() { return element / 2; };
-};
-
-// class template specialization:
-template<>
-class Divide<char>
-{
-	char element;
-public:
-	Divide(char arg) { element = arg; };
-	char PrintElement() { return element; };
-};
-
-class Calculator {
-	int e = 8;
-	int s{ 0 };
-	Divide<int> d = e;
-	Multiply<int> m = { 3,3 };
-public:
-	void DivisorCalc() {
-		cout << d.Execute() << "\n";
-	}
-
-	void SumCalc() {
-		s = sum<int>(3, 5);
-		cout << s << "\n";
-	}
-
-	void Multiply() {
-		cout << m.Execute();
-	}
-};
-
-//Exercise:
-/*Write the class AddElements here*/
-template <class T>
-class AddElements 
-{
-private:
-	T element;
-public:
-	AddElements(T arg) { element = arg; };
-	T add(T p) {
-		return element + p;
-	};
-};
-
-//specialization
-template <>
-class AddElements <string> 
-{
-private:
-	string element;
-public:
-	AddElements(string arg) { element = arg; };
-
-	string concatenate(string p) {
-		return element + p;
-	};
-};
-
-void ClassTemplateOperations() 
-{
-	int n, i;
-	cin >> n;
-	for (i = 0; i < n; i++) {
-		string type;
-		cin >> type;
-		if (type == "float") {
-			double element1, element2;
-			cin >> element1 >> element2;
-			AddElements<double> myfloat(element1);
-			cout << myfloat.add(element2) << endl;
-		}
-		else if (type == "int") {
-			int element1, element2;
-			cin >> element1 >> element2;
-			AddElements<int> myint(element1);
-			cout << myint.add(element2) << endl;
-		}
-		else if (type == "string") {
-			string element1, element2;
-			cin >> element1 >> element2;
-			AddElements<string> mystring(element1);
-			cout << mystring.concatenate(element2) << endl;
-		}
-	}
-}
-
 //************Classes
 
 class Rectangle {
@@ -1695,7 +1574,7 @@ public:
 void Person::getdata() {};
 void Person::putdata() {};
 
-class Professor :public  Person {
+class Professor : public Person {
 private:
 	const int id;
 	static int cur_id;
@@ -1755,7 +1634,6 @@ public:
 
 int Student2::cur_id = 0;
 
-
 void VirtualFuncOperations() {
 
 	int val;
@@ -1776,23 +1654,382 @@ void VirtualFuncOperations() {
 	for (int i = 0; i < n; i++)
 		per[i]->putdata(); // Print the required output for each object.
 
-	//Clean memory
+
 	for (int i = 0; i < n; i++)
 	{
-		delete per[i];
+		delete per[i];//Clean memory
 		per[i] = 0;
 	}
 }
 
-//*****************Abstract Classes
+//*******CLASS TEMPLATES
+//Sum tempalte method
+template <class T>
+T sum(T a, T b)
+{
+	T result;
+	result = a + b;
+	return result;
+}
+
+//Multiply template class
+template <class T>
+class Multiply {
+	T product1, product2;
+public:
+	Multiply(T arg1, T arg2) { product1 = arg1, product2 = arg2; };
+	T Execute() { return product1 * product2; };
+};
+
+//Divide template class
+template <class T>
+class Divide {
+	T element;
+public:
+	Divide(T arg) { element = arg; };
+	T Execute() { return element / 2; };
+};
+
+// class template specialization:
+template<>
+class Divide<char>
+{
+	char element;
+public:
+	Divide(char arg) { element = arg; };
+	char PrintElement() { return element; };
+};
+
+class Calculator {
+	int e = 8;
+	int s{ 0 };
+	Divide<int> d = e;
+	Multiply<int> m = { 3,3 };
+public:
+	void DivisorCalc() {
+		cout << d.Execute() << "\n";
+	}
+
+	void SumCalc() {
+		s = sum<int>(3, 5);
+		cout << s << "\n";
+	}
+
+	void Multiply() {
+		cout << m.Execute();
+	}
+};
+
+//Exercise:
+/*Write the class AddElements here*/
+template <class T>
+class AddElements
+{
+private:
+	T element;
+public:
+	AddElements(T arg) { element = arg; };
+	T add(T p) {
+		return element + p;
+	};
+};
+
+//specialization
+template <>
+class AddElements <string>
+{
+private:
+	string element;
+public:
+	AddElements(string arg) { element = arg; };
+
+	string concatenate(string p) {
+		return element + p;
+	};
+};
+
+void ClassTemplateOperations()
+{
+	int n, i;
+	cin >> n;
+	for (i = 0; i < n; i++) {
+		string type;
+		cin >> type;
+		if (type == "float") {
+			double element1, element2;
+			cin >> element1 >> element2;
+			AddElements<double> myfloat(element1);
+			cout << myfloat.add(element2) << endl;
+		}
+		else if (type == "int") {
+			int element1, element2;
+			cin >> element1 >> element2;
+			AddElements<int> myint(element1);
+			cout << myint.add(element2) << endl;
+		}
+		else if (type == "string") {
+			string element1, element2;
+			cin >> element1 >> element2;
+			AddElements<string> mystring(element1);
+			cout << mystring.concatenate(element2) << endl;
+		}
+	}
+}
+
+//***************** Class Template Specialization
+#include <iostream>
+using namespace std;
+enum class Fruit { apple, orange, pear };
+enum class Color { red, green, orange };
+
+template <typename T> struct Traits;
+
+template<>
+struct Traits<Color> {
+	static string name(int index) 
+	{
+		string asnwer;
+		switch (static_cast<Color>(index)) {
+		case Color::red:
+			asnwer = "red";
+			break;
+		case Color::green:
+			asnwer = "green";
+			break;
+		case Color::orange:
+			asnwer = "orange";
+			break;
+		default:
+			asnwer = "unknown";
+			break;
+			break;
+		};
+		return asnwer;
+	};
+};
+
+template<>
+struct Traits<Fruit>
+{
+	enum class Fruit { apple, orange, pear };
+
+	static string name(int index)
+	{
+		string asnwer;
+		switch (static_cast<Fruit>(index)) {
+		case Fruit::apple:
+			asnwer = "apple";
+			break;
+		case Fruit::orange:
+			asnwer = "orange";
+			break;
+		case Fruit::pear:
+			asnwer = "pear";
+			break;
+		default:
+			asnwer = "unknown";
+			break;
+		};
+		return asnwer;
+	};
+};
 
 
+void TemplateSpecializationOperations()
+{
+	int t = 0; std::cin >> t;
+
+	for (int i = 0; i != t; ++i) {
+		int index1; std::cin >> index1;
+		int index2; std::cin >> index2;
+		cout << Traits<Color>::name(index1) << " ";
+		cout << Traits<Fruit>::name(index2) << "\n";
+	}
+}
+
+//********************Debugging Messages Order
+class Message {
+private:
+	static int cur_id;
+	string text;
+public:
+	int id;
+	//Message() {};
+	//Message(const Message& msg) : id(cur_id++) {};
+	Message() : id(cur_id++) {};	
+
+	const string& get_text() {
+		return text;
+	}
+
+	string set_text(const string& elem) {
+		return text = elem;
+	}
+
+	bool operator <(const Message& a) {
+		if (a.id > this->id) return true;
+		if (a.id < this->id) return false;
+		return 0;
+	};
+};
+
+int Message::cur_id = 0;
+
+class MessageFactory {
+public:
+	MessageFactory() {}
+	Message create_message(const string& text) {
+		Message m;
+		m.set_text(text);
+		return m;
+	}
+};
+
+//A solution using a precise clock (I really liked that one, and it is better)
+//#include <chrono>
+//
+//class Message {
+//	string msg;
+//	chrono::time_point<chrono::high_resolution_clock> sent_at;
+//public:
+//	Message(string msg) : msg(msg) { sent_at = chrono::high_resolution_clock::now(); }
+//	const string& get_text() {
+//		return msg;
+//	}
+//
+//	friend bool operator <(Message& left, Message& right) {
+//		return left.sent_at < right.sent_at;
+//	}
+//};
+//
+//class MessageFactory {
+//public:
+//	MessageFactory() {}
+//	Message create_message(const string& text) {
+//		return Message(text);
+//	}
+//};
+
+class Recipient {
+public:
+	Recipient() {}
+	void receive(const Message& msg) {
+		messages_.push_back(msg);
+	}
+	void print_messages() {
+		fix_order();
+		for (auto& msg : messages_) {
+			cout << msg.get_text() << endl;
+		}
+		messages_.clear();
+	}
+private:
+	void fix_order() {
+		sort(messages_.begin(), messages_.end());
+	}
+	vector<Message> messages_;
+};
+
+class Network {
+public:
+	static void send_messages(vector<Message> messages, Recipient& recipient) {
+		// simulates the unpredictable network, where sent messages might arrive in unspecified order
+		random_shuffle(messages.begin(), messages.end());
+		for (auto msg : messages) {
+			recipient.receive(msg);
+		}
+	}
+};
+
+void MessagesExchangerClient() {
+	MessageFactory message_factory;
+	Recipient recipient;
+	vector<Message> messages;
+	string text;
+	int msglimit = 0; // I just putted this to simulate an end to the task (:
+	while (getline(cin, text) && msglimit < 3) {
+		messages.push_back(message_factory.create_message(text));
+		msglimit++;
+	}
+	Network::send_messages(messages, recipient);
+	recipient.print_messages();
+};
+
+//****************************ATTENDING WORKSHOPS (Data and Structures problem) //Interval scheduling Problem
+//#include<bits/stdc++.h>
+
+//Define the structs Workshops and Available_Workshops.
+struct Workshop
+{
+	int startTime, 
+		duration,
+		endtime;
+};
+
+struct Available_Workshops 
+{
+private:
+	int signedWorkshops;
+	Workshop* workShops = new Workshop[signedWorkshops];
+};
+
+//Implement the functions initialize and CalculateMaxWorkshops
+Available_Workshops* initialize(int start_time[], int duration[], int n) {
+	for (int i = 0; i < n; i++) {
+		Workshop* w = new Workshop;
+		w->startTime = start_time[i];
+		w->duration = duration[i];
+		w->endtime = abs(w->startTime + w->duration);	
+	}
+};
+
+int CalculateMaxWorkshops(Available_Workshops* ptr) {
+
+};
+
+void ExecWorkshops() {
+	int n; // number of workshops
+	cin >> n;
+	// create arrays of unknown size n
+	int* start_time = new int[n];
+	int* duration = new int[n];
+
+	for (int i = 0; i < n; i++) {
+		cin >> start_time[i];
+	}
+	for (int i = 0; i < n; i++) {
+		cin >> duration[i];
+	}
+
+	Available_Workshops * ptr;
+	ptr = initialize(start_time, duration, n);
+	cout << CalculateMaxWorkshops(ptr) << endl;
+}
+
+
+void PlayLambdas() {
+	int a = 3, b = 10;
+
+};
 
 
 
 int main()
  {
-	VirtualFuncOperations();
+
+
+	//MessagesExchangerClient();
+	
+	/*Message m;
+	string text;
+	cin >> text;
+	MessageFactory mf;
+	while (getline(cin, text)) {
+		m =	mf.create_message(text);
+	}
+	cout << "\n" << m.get_text();*/
+
+
 
 	//Accessing Inherited Functions Tests:
 	//D d;
